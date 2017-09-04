@@ -22,7 +22,10 @@ import (
 
 // The OptsT type defines all the configurable options from cli.
 type OptsT struct {
-	NoHTML bool
+	TempFile string
+	SendTo   string
+	Template string
+	NoHTML   bool
 	Verbose  int
 }
 
