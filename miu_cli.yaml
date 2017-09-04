@@ -1,0 +1,62 @@
+# program name, name for the executable
+ProgramName: miu
+
+PackageName: main
+
+Name: miu
+Desc: "Monitor Internet Usage"
+Text: Tool to monitor Internet usage from ISP
+#NumOption: cli.AtLeast(1)
+NumArg: cli.AtLeast(1)
+Global: true
+
+#UsageLead: "Usage:\\n  miu [Options] dir [dirs...]"
+
+Options:
+  - Name: CSS
+    Type: string
+    Flag: css
+    Usage: css selection for usage text from usage rul
+
+  - Name: SendTo
+    Type: string
+    Flag: to
+    Usage: email address to send to
+
+  - Name: Template
+    Type: string
+    Flag: template
+    Usage: mail sending command template string
+
+  - Name: DaysShift
+    Type: int
+    Flag: d,days
+    Usage: days to shift from billing date
+
+  - Name: Verbose
+    Type: cli.Counter
+    Flag: v,verbose
+    Usage: Verbose mode (Multiple -v increase the verbosity)
+
+Command:
+
+  - Name: default
+    Desc: Default ISP 
+    Text: 'Usage:\n  miu default'
+    #NumArg: cli.AtLeast(1)
+    NumOption: cli.AtLeast(1)
+    # this (Self) means that this subcmd is using the self-config .json file
+    Self: true
+
+    Options:
+      - Name: Self
+        Type: '*defaultT'
+        Flag: c,conf
+        Usage: config file
+        Value: cfg_dft.json
+
+      - Name: Url
+        Type: '*clix.Reader'
+        Flag: i,url
+        Usage: usage URL from ISP
+
