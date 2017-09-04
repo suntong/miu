@@ -7,7 +7,7 @@
 package main
 
 import (
-	"fmt"
+	"os"
 
 	"github.com/mkideal/cli"
 )
@@ -17,7 +17,9 @@ import (
 
 func defaultCLI(ctx *cli.Context) error {
 	rootArgv = ctx.RootArgv().(*rootT)
-	argv := ctx.Argv().(*defaultT)
-	fmt.Printf("[default]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
-	return nil
+	// argv := ctx.Argv().(*defaultT)
+	// fmt.Printf("[default]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
+	Opts.NoHTML, Opts.Verbose = rootArgv.NoHTML, rootArgv.Verbose.Value()
+
+	return Cascadia(rootArgv.Filei, os.Stdout, rootArgv.CSS)
 }

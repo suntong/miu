@@ -19,10 +19,11 @@ import (
 
 type rootT struct {
 	cli.Helper
-	UsagePage *clix.Reader `cli:"i,url" usage:"usage URL from ISP"`
-	CSS       string       `cli:"css" usage:"css selection for usage text from usage rul"`
-	SendTo    string       `cli:"to" usage:"email address to send to"`
-	Template  string       `cli:"template" usage:"mail sending command template string"`
+	Filei     *clix.Reader `cli:"*i,url" usage:"usage URL from ISP"`
+	CSS       string       `cli:"*c,css" usage:"css selection for usage text from usage rul"`
+	SendTo    string       `cli:"t,to" usage:"email address to send to"`
+	Template  string       `cli:"p,template" usage:"mail sending command template string"`
+	NoHTML    bool         `cli:"n,no-html" usage:"do not wrap up the output with html tags"`
 	DaysShift int          `cli:"d,days" usage:"days to shift from billing date"`
 	Verbose   cli.Counter  `cli:"v,verbose" usage:"Verbose mode (Multiple -v increase the verbosity)"`
 }
@@ -95,10 +96,9 @@ type defaultT struct {
 var defaultDef = &cli.Command{
 	Name: "default",
 	Desc: "Default ISP",
-	Text: "Usage:\n  miu default .",
+	Text: "Usage:\n  miu default -i http://url/ -c css.sel",
 	Argv: func() interface{} { return new(defaultT) },
 	Fn:   defaultCLI,
 
-	NumArg:      cli.AtLeast(1),
-	CanSubRoute: true,
+	NumOption: cli.AtLeast(1),
 }

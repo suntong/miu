@@ -14,25 +14,30 @@ Global: true
 
 Options:
 
-  - Name: UsagePage
+  - Name: Filei
     Type: '*clix.Reader'
-    Flag: i,url
+    Flag: '*i,url'
     Usage: usage URL from ISP
 
   - Name: CSS
     Type: string
-    Flag: css
+    Flag: '*c,css'
     Usage: css selection for usage text from usage rul
 
   - Name: SendTo
     Type: string
-    Flag: to
+    Flag: t,to
     Usage: email address to send to
 
   - Name: Template
     Type: string
-    Flag: template
+    Flag: p,template
     Usage: mail sending command template string
+
+  - Name: NoHTML
+    Type: bool
+    Flag: n,no-html
+    Usage: do not wrap up the output with html tags
 
   - Name: DaysShift
     Type: int
@@ -48,8 +53,8 @@ Command:
 
   - Name: default
     Desc: Default ISP 
-    Text: 'Usage:\n  miu default .'
-    NumArg: cli.AtLeast(1)
-    #NumOption: cli.AtLeast(1)
+    Text: 'Usage:\n  miu default -i http://url/ -c css.sel'
+    #NumArg: cli.AtLeast(1)
+    NumOption: cli.AtLeast(1)
 
 
