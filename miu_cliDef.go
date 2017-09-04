@@ -19,11 +19,12 @@ import (
 
 type rootT struct {
 	cli.Helper
-	CSS       string      `cli:"css" usage:"css selection for usage text from usage rul"`
-	SendTo    string      `cli:"to" usage:"email address to send to"`
-	Template  string      `cli:"template" usage:"mail sending command template string"`
-	DaysShift int         `cli:"d,days" usage:"days to shift from billing date"`
-	Verbose   cli.Counter `cli:"v,verbose" usage:"Verbose mode (Multiple -v increase the verbosity)"`
+	UsagePage *clix.Reader `cli:"i,url" usage:"usage URL from ISP"`
+	CSS       string       `cli:"css" usage:"css selection for usage text from usage rul"`
+	SendTo    string       `cli:"to" usage:"email address to send to"`
+	Template  string       `cli:"template" usage:"mail sending command template string"`
+	DaysShift int          `cli:"d,days" usage:"days to shift from billing date"`
+	Verbose   cli.Counter  `cli:"v,verbose" usage:"Verbose mode (Multiple -v increase the verbosity)"`
 }
 
 var root = &cli.Command{
@@ -89,16 +90,15 @@ var root = &cli.Command{
 //  }
 
 type defaultT struct {
-	Self *rootT       `cli:"c,conf" usage:"config file" json:"-" parser:"jsonfile" dft:"cfg_dft.json"`
-	Url  *clix.Reader `cli:"i,url" usage:"usage URL from ISP"`
 }
 
 var defaultDef = &cli.Command{
 	Name: "default",
 	Desc: "Default ISP",
-	Text: "Usage:\n  miu default",
-	Argv: func() interface{} { t := new(defaultT); t.Self = t; return t },
+	Text: "Usage:\n  miu default .",
+	Argv: func() interface{} { return new(defaultT) },
 	Fn:   defaultCLI,
 
-	NumOption: cli.AtLeast(1),
+	NumArg:      cli.AtLeast(1),
+	CanSubRoute: true,
 }

@@ -13,6 +13,12 @@ Global: true
 #UsageLead: "Usage:\\n  miu [Options] dir [dirs...]"
 
 Options:
+
+  - Name: UsagePage
+    Type: '*clix.Reader'
+    Flag: i,url
+    Usage: usage URL from ISP
+
   - Name: CSS
     Type: string
     Flag: css
@@ -42,21 +48,8 @@ Command:
 
   - Name: default
     Desc: Default ISP 
-    Text: 'Usage:\n  miu default'
-    #NumArg: cli.AtLeast(1)
-    NumOption: cli.AtLeast(1)
-    # this (Self) means that this subcmd is using the self-config .json file
-    Self: true
+    Text: 'Usage:\n  miu default .'
+    NumArg: cli.AtLeast(1)
+    #NumOption: cli.AtLeast(1)
 
-    Options:
-      - Name: Self
-        Type: '*defaultT'
-        Flag: c,conf
-        Usage: config file
-        Value: cfg_dft.json
-
-      - Name: Url
-        Type: '*clix.Reader'
-        Flag: i,url
-        Usage: usage URL from ISP
 
