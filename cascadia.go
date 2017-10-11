@@ -22,12 +22,14 @@ func Cascadia(bi io.Reader, bw io.Writer, css string) error {
 	abortOn("CSS Selector string "+css, err)
 
 	if !Opts.NoHTML {
-		fmt.Fprintln(bw, `<!DOCTYPE html>
+		fmt.Fprintf(bw, `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
+    <base href="%s">
   </head>
-<body>`)
+<body>
+`, Opts.Base)
 	}
 
 	// https://godoc.org/github.com/andybalholm/cascadia

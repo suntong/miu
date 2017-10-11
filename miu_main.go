@@ -25,6 +25,7 @@ type OptsT struct {
 	TempFile string
 	SendTo   string
 	Template string
+	Base     string
 	NoHTML   bool
 	Verbose  int
 }
@@ -35,7 +36,7 @@ type OptsT struct {
 var (
 	progname = "miu"
 	version  = "0.1.0"
-	date     = "2017-09-04"
+	date     = "2017-10-10"
 )
 
 var (

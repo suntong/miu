@@ -23,6 +23,7 @@ type rootT struct {
 	CSS       string       `cli:"*c,css" usage:"css selection for usage text from usage rul"`
 	SendTo    string       `cli:"t,to" usage:"email address to send to"`
 	Template  string       `cli:"p,template" usage:"mail sending command template string"`
+	Base      string       `cli:"b,base" usage:"base href tag used in the wrapped up html"`
 	NoHTML    bool         `cli:"n,no-html" usage:"do not wrap up the output with html tags"`
 	DaysShift int          `cli:"d,days" usage:"days to shift from billing date"`
 	Verbose   cli.Counter  `cli:"v,verbose" usage:"Verbose mode (Multiple -v increase the verbosity)"`
@@ -41,15 +42,33 @@ var root = &cli.Command{
 
 // Template for main starts here
 ////////////////////////////////////////////////////////////////////////////
+// Constant and data type/structure definitions
+
+// The OptsT type defines all the configurable options from cli.
+//  type OptsT struct {
+//  	Filei	*clix.Reader
+//  	CSS	string
+//  	SendTo	string
+//  	Template	string
+//  	Base	string
+//  	NoHTML	bool
+//  	DaysShift	int
+//  	Verbose	cli.Counter
+//  	Verbose int
+//  }
+
+////////////////////////////////////////////////////////////////////////////
 // Global variables definitions
 
 //  var (
 //          progname  = "miu"
 //          version   = "0.1.0"
-//          date = "2017-09-04"
-//  )
+//          date = "2017-10-10"
 
-//  var rootArgv *rootT
+//  	rootArgv *rootT
+//  	// Opts store all the configurable options
+//  	Opts OptsT
+//  )
 
 ////////////////////////////////////////////////////////////////////////////
 // Function definitions
@@ -87,6 +106,8 @@ var root = &cli.Command{
 //  	rootArgv = ctx.RootArgv().(*rootT)
 //  	argv := ctx.Argv().(*defaultT)
 //  	fmt.Printf("[default]:\n  %+v\n  %+v\n  %v\n", rootArgv, argv, ctx.Args())
+//  	Opts.Filei, Opts.CSS, Opts.SendTo, Opts.Template, Opts.Base, Opts.NoHTML, Opts.DaysShift, Opts.Verbose, Opts.Verbose =
+//  		rootArgv.Filei, rootArgv.CSS, rootArgv.SendTo, rootArgv.Template, rootArgv.Base, rootArgv.NoHTML, rootArgv.DaysShift, rootArgv.Verbose, rootArgv.Verbose.Value()
 //  	return nil
 //  }
 

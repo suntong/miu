@@ -34,6 +34,11 @@ Options:
     Flag: p,template
     Usage: mail sending command template string
 
+  - Name: Base
+    Type: string
+    Flag: b,base
+    Usage: base href tag used in the wrapped up html
+
   - Name: NoHTML
     Type: bool
     Flag: n,no-html
